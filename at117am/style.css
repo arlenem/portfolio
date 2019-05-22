@@ -1,0 +1,435 @@
+/*
+Theme Name: Arlene Child Theme
+Theme URI: http://at117am.com
+Author: Arlene Murrin
+Author URI: http://at117am.com
+Description: Custom Theme to showcase photography and new web tricks and techniques
+Template: twentyseventeen
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready, blog
+Text Domain: arlene_theme
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+
+/**
+ * Table of Contents
+ *
+ * 1.0 - Font Styles
+ * 2.0 - Elements
+ * 3.0 - Globals
+ * 4.0 - Home Header
+ * 5.0 - Header
+ * 6.0 - Footer
+ * 7.0 - Mobile
+ */
+
+
+/**
+ * 1.0 - Font Styles
+ *
+ * 
+ * 
+ */
+p, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, a, .a2, .a3, div{
+    color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+    h1, .h1{
+        font-size: 5rem;
+        font-weight: 700;
+    }
+    h2, .h2{
+        font-size: 3.5rem;
+        font-weight: 700;
+    }
+    a, .a2{
+        color: #F5E6D4;
+    }
+    a:hover, .a2:hover{
+        color: #e0ad72;
+    }
+    .a2{
+        font-size: 1.25rem;
+    }
+    .a3, 
+    form input[type='submit']{
+        background-color: #e0ad72;
+        color: #FFFFFF;
+        padding: .6rem 1.25rem;
+        line-height: 1.1;
+        font-size: 1.25rem;
+    }
+
+.white-text{
+    color: #FFFFFF;
+}
+.white-background{
+    background-color: #FFFFFF;
+}
+
+.black-text{
+    color: #000000;
+}
+.black-background{
+    background-color: #000000;
+}
+
+/**
+ * 2.0 - Elements Styles
+ *
+ * 
+ *
+ */
+body{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#131d26+0,192f42+36,4c6273+67,e0ad72+100 */
+    /*background: #131d26; 
+    background: -moz-linear-gradient(top, #131d26 0%, #192f42 36%, #4c6273 67%, #e0ad72 100%); 
+    background: -webkit-linear-gradient(top, #131d26 0%,#192f42 36%,#4c6273 67%,#e0ad72 100%); 
+    background: linear-gradient(to bottom, #131d26 0%,#192f42 36%,#4c6273 67%,#e0ad72 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131d26', endColorstr='#e0ad72',GradientType=0 ); */
+
+   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#121212+0,1c2a38+29,192f42+51,3d5566+76,e0ad72+100 */
+    background: #121212; /* Old browsers */
+    background: -moz-linear-gradient(top, #121212 0%, #1c2a38 29%, #192f42 51%, #3d5566 76%, #e0ad72 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #121212 0%,#1c2a38 29%,#192f42 51%,#3d5566 76%,#e0ad72 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #121212 0%,#1c2a38 49%,#3d5566 76%,#e0ad72 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#121212', endColorstr='#e0ad72',GradientType=0 ); /* IE6-9 */
+
+    overflow-x: hidden;
+}
+
+form{
+    width: 75vw;
+}
+
+form span,
+form label,
+form input,
+form textarea{
+    width: 100%;
+}
+
+form input[type='submit']{
+    width: auto;
+    float: right;
+    -webkit-appearance: none;
+    border: none;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+form:after,
+form p:after,
+.clear-after:after {
+    content: "";
+    float: none!important;
+    clear: both!important;
+    display: block;
+}
+
+form .ajax-loader{
+    float: right;
+    margin: .75rem;
+}
+
+article{
+    width: 90%;
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 40px 0;
+    padding: 3.3333vw 0 50vh 0;
+}
+
+/**
+ * 3.0 - Globals
+ *
+ * 
+ *
+ */
+.skip-link{
+    margin-left: -1000px;
+}
+
+.site-content-contain{
+    overflow: hidden;
+}
+
+.row{
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.row [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.image-background{
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+/**
+ * 4.0 - Home Header 
+ *
+ */
+.header-group{
+    position: relative;
+    height: 500vh;
+}
+
+.header-group .intro-text{
+    position: absolute;
+} 
+
+.header-group .hello{
+    left: 3vw;
+    top: 3vh;
+    position: fixed;
+}
+
+.header-group .hello2{
+    left: 23vw;
+    top: 13.5vh;
+    position: fixed;
+}
+
+.header-group .answer{
+    right: 3vw;
+    top: 300vh;
+    opacity: 0;
+}
+    .header-group .answer.in-view{
+        position: fixed;
+        opacity: 1;
+        top: auto;
+        bottom: 7vh;
+    }
+
+.header-group h3{
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.header-group h3,
+.header-group .answer{
+    -webkit-transition: all 2s ease-out;
+    -moz-transition: all 2s ease-out;
+    -o-transition: all 2s ease-out;
+    transition: all 2s ease-out;
+    transition-property: opacity, width;
+}
+    .header-group h3.in-view{
+        width: 50px;
+        opacity: 1;
+    }
+    .header-group h3.in-view span{
+        position: fixed;
+    }
+
+.header-group .text1{
+    left: 70vw;
+    top: 100vh;
+}
+    .header-group .text1.in-view span{
+        top: 65vh;
+    }
+
+.header-group .text2{
+    left: 52vw;
+    top: 137vh;
+}
+    .header-group .text2.in-view span{
+        top: 37vh;
+    }
+
+.header-group .text2-5{
+    left: 7vw;
+    top: 167vh;
+}
+    .header-group .text2-5.in-view span{
+        top: 85vh;
+    }
+
+.header-group .text3{
+    left: 30vw;
+    top: 196vh;
+}
+    .header-group .text3.in-view span{
+        top: 66vh;
+    }
+
+.header-group .text4{
+    left: 70vw;
+    top: 240vh;
+}
+    .header-group .text4.in-view span{
+        top: 20vh;
+    }
+
+.header-group .text5{
+    left: 10vw;
+    top: 280vh;
+}
+    .header-group .text5.in-view span{
+        top: 30vh;
+    }
+
+.header-group .text6{
+    left: 50vw;
+    top: 335vh;
+}
+    .header-group .text6.in-view span{
+        top: 55vh;
+    }
+
+.header-group .text7{
+    left: 10vw;
+    top: 380vh;
+}
+    .header-group .text7.in-view span{
+        top: 60vh;
+    }
+
+.header-group .text8{
+    left: 70vw;
+    top: 420vh;
+}
+    .header-group .text8.in-view span{
+        top: 70vh;
+    }
+
+
+/**
+ * 5.0 - Header
+ *
+ * 
+ *
+ */
+
+
+
+/**
+ * 6.0 - Footer
+ *
+ * 
+ *
+ */
+footer .image-background{
+    background-image: url('./img/trees5.png');
+    background-position: top center;
+    height: 16.6667vw;
+    min-height: 100px;
+    border-bottom: 1px solid black;
+}
+
+footer .wrap{
+    /*height: 33.3333vw;
+    min-height: 400px;*/
+    padding: 40px;
+}
+footer .right{
+    /*width: 50%;
+    float: right;*/
+    text-align: right;
+}
+    .home .footer-answer{
+        display: none;
+    }
+/*footer .left{
+    width: 50%;
+    float: left;
+}*/
+
+footer .small-text{
+    font-size: .75rem;
+}
+
+footer .menu a{
+    padding: 0 .6rem 0 0;
+}
+    footer .menu a + a{
+        padding: 0 0 0 .6rem;
+    }
+
+/**
+ * 7.0 - Mobile
+ *
+ * 
+ *
+ */
+@media screen and (max-width: 1075px) {
+    .mini-resume h2{
+        font-size: 2rem;
+        margin: 1.25rem 0 .5rem 0;
+    }
+
+    .mini-resume h4{
+        font-size: 1.2rem;
+    }
+
+}
+
+@media screen and (max-width: 925px) {
+    .mini-resume article{
+        width: 45%;
+        margin: 0 auto 0 5%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .header-group h1,
+    .home .footer-answer{
+        font-size: 4rem;
+    }
+
+    .header-group .hello2{
+        font-size: 2.5rem;
+        top: 12.5vh;
+    }
+
+    .header-group h3{
+        font-size: 1.5rem;
+    }
+
+    .header-group .text2-5.in-view span {
+        top: 55vh;
+    }
+
+    .header-group .text8 {
+        left: 60vw;
+    }
+}
+
+@media screen and (max-width: 625px) {
+    .header-group .answer.in-view{
+        display: none;
+    }
+    .home .footer-answer{
+        display: block;
+    }
+    footer .wrap{
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header-group .text8 {
+        left: 40vw;
+    }
+    footer .right{
+        padding-bottom: 20px;
+    }
+}
+
