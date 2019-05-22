@@ -1,0 +1,57 @@
+form:not(.typeface_code-group) .form-table tr{
+	width: 33%;
+	float: left;
+}
+
+form:not(.typeface_code-group) .form-table th{
+	width: 110px;
+}
+form:not(.typeface_code-group) .form-table td{
+	width: 60%;
+}
+form:not(.typeface_code-group) .form-table select{
+	width: 100%;
+}
+
+form.colors-group .form-table tr{
+	width: 50%;
+}
+
+form.colors-group .form-table th{
+	width: 200px;
+}
+
+.form-table{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.wrap h1{
+	padding: 20px 0 10px 0;
+}
+
+.wrap h2{
+	margin: 10px 0;
+}
+
+.wrap p{
+	margin: 0;
+}
+
+.wrap h2.nav-tab-wrapper{
+	border-color: #92bd64;
+	display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.nav-tab{
+	background-color: rgba(146, 189, 100, 0.1);
+	border-color: #92bd64;
+	flex: 1 1 auto;
+}
+
+.nav-tab-active{
+	background-color: rgb(241, 241, 241);
+	border-bottom: 1px solid #f1f1f1;
+}
