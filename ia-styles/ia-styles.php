@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: IA Stylesheet
-Version: 1.1
+Version: 1.2
 Text Domain: ia-styles
 Domain Path: /languages
 Description: Define global font styles and colors
@@ -91,9 +91,9 @@ class IA_Styles {
 
 	/**
 	 * @var plugin $global_styles
-	 * @since 1.1
+	 * @since 1.2
 	 */
-	public $global_styles = array('article-padding', 'module-title-bottom-margin', 'column-gutter', 'small-margin', 'medium-margin', 'large-margin');
+	public $global_styles = array('article-padding', 'module-title-bottom-margin', 'column-gutter', 'extra-small-margin', 'small-margin', 'medium-margin', 'large-margin', 'extra-large-margin');
 
 	/**
 	 * @var plugin $global_buttons
@@ -113,6 +113,13 @@ class IA_Styles {
 	 */
 	public $css_global_button = array('padding-top', 'padding-right', 'padding-bottom', 'padding-left');
 
+	/**
+	 * @var plugin $h_spacing
+	 * @since 1.2
+	 */
+	public $h_spacing = array(
+		'bottom_spacing' => array('extra-small', 'small', 'medium', 'large', 'extra-large')
+	);
 
 	/**
 	 * @var plugin $colors Stores the color declarations (name and hexcode)
@@ -547,6 +554,23 @@ class IA_Styles {
 			    	$fields[$count]['options'][$option] = $option;
 			    }
 			}
+			foreach ($this->h_spacing as $select => $options) {
+				$fields[] = array(
+			        'uid' => "ia_styles_options[$font][$select]",
+			        'label' => $select,
+			        'section' => $font,
+			        'type' => 'select',
+			        'options' => array(),
+		            'placeholder' => false,
+		            'helper' => false,
+		            'supplemental' => false,
+		            'default' => $ia_styles_options[$font][$select]
+			    );
+			    $count = count($fields)-1;
+			    foreach ($options as $option) {
+			    	$fields[$count]['options'][$option] = $option;
+			    }
+			}
 		}
 		foreach ($this->nav_fonts as $font) {
 			foreach ($this->css_text as $text) {
@@ -698,11 +722,12 @@ class IA_Styles {
 	 //        add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'ia_styles_options', $field['section'], $field );
 	 //        register_setting( 'ia_styles_options', $field['uid'] );
 	 //    }
+
 		foreach ($this->global_styles as $font) {
 			foreach ($this->css_globals as $text) {
 				$fields[] = array(
 		            'uid' => "ia_styles_options[$font][$text]",
-		            'label' => 'Amount',
+		            'label' => $text,
 		            'section' => $font,
 		            'type' => 'text',
 		            'options' => false,
@@ -763,23 +788,29 @@ class IA_Styles {
 		if ($arguments['id'] === 'article-padding'){
 			echo '<p>This sets the padding on the top and bottom of the modules within the grid. Enter the value in pixels (ie: 10px).</p>';
 		}
-		if ($arguments['id'] === 'module-title-bottom-margin'){
-			echo '<p>This sets the margin below on the module title in modules that use this global style. Enter the value in em (ie: 2em) or in pixels (ie: 20px).</p>';
-			echo '<p>The em value is the percentage relative to the font size of the element it used on.</p>';
+		if ($arguments['id'] === 'margin-title-bottom-margin'){
+			echo '<p>This sets the margin below on the module title in modules that use this global style. Enter the value in pixels (ie: 10px).</p>';
 		}
 		if ($arguments['id'] === 'column-gutter'){
 			echo '<p>This sets the padding between columns in modules that use bootstrap or the class name "gutter". This needs to be an even number.</p>';
 			echo '<p>This will add the same amount as margin below each column. This adds the same space below each item as is between each item.</p>';
 			echo '<p>Enter the total amount for the space needed between columns and enter the value in pixels (ie: 10px).</p>';
 		}
+		if ($arguments['id'] === 'extra-small-margin'){
+			echo '<p>This sets the margin size for the extra-small-margin-top, extra-small-margin-bottom, extra-small-padding-top, extra-small-padding-bottom options in modules that use this option field.</p><p>This field may also be used in Article Padding, and assigned to Header Styles.</p><p> Enter the value in pixels (ie: 10px).</p>';
+		}
 		if ($arguments['id'] === 'small-margin'){
-			echo '<p>This sets the margin size for the small-margin-top, small-margin-bottom, small-padding-top, small-padding-bottom options in modules that use this option field. Enter the value in pixels (ie: 10px).</p>';
+			echo '<p>This sets the margin size for the small-margin-top, small-margin-bottom, small-padding-top, small-padding-bottom options in modules that use this option field.</p><p>This field may also be used in Article Padding, and assigned to Header Styles.</p><p> Enter the value in pixels (ie: 10px).</p>';
 		}
 		if ($arguments['id'] === 'medium-margin'){
-			echo '<p>This sets the margin size for the medium-margin-top, medium-margin-bottom, medium-padding-top, medium-padding-bottom options in modules that use this option field. Enter the value in pixels (ie: 10px).</p>';
+			echo '<p>This sets the margin size for the medium-margin-top, medium-margin-bottom, medium-padding-top, medium-padding-bottom options in modules that use this option field.</p><p>This field may also be used in Article Padding, and assigned to Header Styles.</p><p> Enter the value in pixels (ie: 10px).</p>';
 		}
 		if ($arguments['id'] === 'large-margin'){
-			echo '<p>This sets the margin size for the large-margin-top, large-margin-bottom, large-padding-top, large-padding-bottom options in modules that use this option field. Enter the value in pixels (ie: 10px).</p>';
+			echo '<p>This sets the margin size for the large-margin-top, large-margin-bottom, large-padding-top, large-padding-bottom options in modules that use this option field.</p><p>This field may also be used in Article Padding, and assigned to Header Styles.</p><p> Enter the value in pixels (ie: 10px).</p>';
+		}
+
+		if ($arguments['id'] === 'extra-large-margin'){
+			echo '<p>This sets the margin size for the extra-large-margin-top, extra-large-margin-bottom, extra-large-padding-top, extra-large-padding-bottom options in modules that use this option field.</p><p>This field may also be used in Article Padding, and assigned to Header Styles.</p><p> Enter the value in pixels (ie: 10px).</p>';
 		}
 	}
 
@@ -819,7 +850,7 @@ class IA_Styles {
 	 * @since  1.1
 	 */
 	public function validate_options( $input ){
-		//TODO make sure the values are clean.
+		
 		$options = get_option('ia_styles_options');
 		
 		if (is_array($input) && !empty($input)) {
@@ -831,6 +862,11 @@ class IA_Styles {
 						}
 					}
 					foreach ($this->css_select as $select => $value) {
+						if ($input[$font][$select]) {
+							$options[$font][$select] = $input[$font][$select];
+						}
+					}
+					foreach ($this->h_spacing as $select => $value) {
 						if ($input[$font][$select]) {
 							$options[$font][$select] = $input[$font][$select];
 						}

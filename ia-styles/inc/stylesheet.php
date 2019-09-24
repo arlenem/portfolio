@@ -33,7 +33,7 @@ function create_rules() {
 
 	$rules .= "}";
 
-	function create_font_rule($opt_array){
+	function create_font_rule($opt_array, $c){
 			$opt_rules = '';
 			foreach ($opt_array as $key => $value) {
 			    if ($key === 'color') {
@@ -47,10 +47,24 @@ function create_rules() {
 			    		$value2 = $num . 'vw';
 			    	}
 			    	$opt_rules .= $key . ": ". $value2 .";";
+			    } elseif ($key === 'bottom_spacing') {
+			    	//skip
 			    } else {
 			    	$opt_rules .= $key . ": ". $value .";";
 			    }
 			}
+			return $opt_rules;
+	}
+
+	function create_font_spacing_rule($pix_amt){
+			$opt_rules = '';
+			$num = substr($pix_amt, 0, strpos($pix_amt, 'px'));
+    		$num = (int)$num / 12;
+    		$value2 = $num . 'vw';
+
+			$opt_rules .= "margin-bottom: ". $pix_amt .";";
+			$opt_rules .= "margin-bottom: ". $value2 .";";
+			
 			return $opt_rules;
 	}
 
@@ -71,105 +85,153 @@ function create_rules() {
 	//p rules 
 	$rules .= "p, .p, div, li, body, input, textarea {";
 		if (is_array($options['p']) && !empty($options['p'])) {
-			$rules .= create_font_rule($options['p']);
+			$rules .= create_font_rule($options['p'], $c);
 		}
 	$rules .= "}";
 
 	//.p1 rules 
 	$rules .= ".p1 {";
 		if (is_array($options['p1']) && !empty($options['p1'])) {
-			$rules .= create_font_rule($options['p1']);
+			$rules .= create_font_rule($options['p1'], $c);
 		}
 	$rules .= "}";
 
 	//H1 rules
 	$rules .= "h1, .h1 { ";
 		if (is_array($options['h1']) && !empty($options['h1'])) {
-			$rules .= create_font_rule($options['h1']);
+			$rules .= create_font_rule($options['h1'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h1.h-spacing, .h1.h-spacing { ";
+		if ( is_array($options['h1']) && !empty($options['h1']['bottom_spacing']) ) {
+			$bott = $options['h1']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 
 	//H2 rules
 	$rules .= "h2, .h2 {";
 		if (is_array($options['h2']) && !empty($options['h2'])) {
-			$rules .= create_font_rule($options['h2']);
+			$rules .= create_font_rule($options['h2'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h2.h-spacing, .h2.h-spacing { ";
+		if ( is_array($options['h2']) && !empty($options['h2']['bottom_spacing']) ) {
+			$bott = $options['h2']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 
 	//H3 rules 
 	$rules .= "h3, .h3 {";
 		if (is_array($options['h3']) && !empty($options['h3'])) {
-			$rules .= create_font_rule($options['h3']);
+			$rules .= create_font_rule($options['h3'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h3.h-spacing, .h3.h-spacing { ";
+		if ( is_array($options['h3']) && !empty($options['h3']['bottom_spacing']) ) {
+			$bott = $options['h3']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 
 	//H4 rules 
 	$rules .= "h4, .h4 {";
 		if (is_array($options['h4']) && !empty($options['h4'])) {
-			$rules .= create_font_rule($options['h4']);
+			$rules .= create_font_rule($options['h4'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h4.h-spacing, .h4.h-spacing { ";
+		if ( is_array($options['h4']) && !empty($options['h4']['bottom_spacing']) ) {
+			$bott = $options['h4']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 
 	//h5 rules 
 	$rules .= "h5, .h5 {";
 		if (is_array($options['h5']) && !empty($options['h5'])) {
-			$rules .= create_font_rule($options['h5']);
+			$rules .= create_font_rule($options['h5'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h5.h-spacing, .h5.h-spacing { ";
+		if ( is_array($options['h5']) && !empty($options['h5']['bottom_spacing']) ) {
+			$bott = $options['h5']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 	
 	//h6 rules 
 	$rules .= "h6, .h6 {";
 		if (is_array($options['h6']) && !empty($options['h6'])) {
-			$rules .= create_font_rule($options['h6']);
+			$rules .= create_font_rule($options['h6'], $c);
+		}
+	$rules .= "}";
+	$rules .= "h6.h-spacing, .h6.h-spacing { ";
+		if ( is_array($options['h6']) && !empty($options['h6']['bottom_spacing']) ) {
+			$bott = $options['h6']['bottom_spacing'].'-margin';
+			if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+				$rules .= create_font_spacing_rule($options[$bott]['pixel-amount']);
+			}
 		}
 	$rules .= "}";
 
 	//a rules 
 	$rules .= "a, .a {";
 	    if (is_array($options['a']) && !empty($options['a'])) {
-			$rules .= create_font_rule($options['a']);
+			$rules .= create_font_rule($options['a'], $c);
 		}
 	$rules .= "}";
 
 	//a_hover rules 
 	$rules .= "a:hover, .a:hover, a:focus, .a:focus {";
 	    if (is_array($options['a_hover']) && !empty($options['a_hover'])) {
-			$rules .= create_font_rule($options['a_hover']);
+			$rules .= create_font_rule($options['a_hover'], $c);
 		}
 	$rules .= "}";
 	
 	//a1 rules 
 	$rules .= ".a2 {";
 	    if (is_array($options['a2']) && !empty($options['a2'])) {
-			$rules .= create_font_rule($options['a2']);
+			$rules .= create_font_rule($options['a2'], $c);
 		}
 	$rules .= "}";
 
 	//a1_hover rules 
 	$rules .= ".a2:hover, .a2:focus {";
 	    if (is_array($options['a2_hover']) && !empty($options['a2_hover'])) {
-			$rules .= create_font_rule($options['a2_hover']);
+			$rules .= create_font_rule($options['a2_hover'], $c);
 		}
 	$rules .= "}";
 
 	//a3 rules 
 	$rules .= ".a3 {";
 		if (is_array($options['a3']) && !empty($options['a3'])) {
-			$rules .= create_font_rule($options['a3']);
+			$rules .= create_font_rule($options['a3'], $c);
 		}
 	$rules .= "}";
 
 	//a3_hover rules 
 	$rules .= ".a3:hover, .a3:focus {";
 	    if (is_array($options['a3_hover']) && !empty($options['a3_hover'])) {
-			$rules .= create_font_rule($options['a3_hover']);
+			$rules .= create_font_rule($options['a3_hover'], $c);
 		}
 	$rules .= "}";
 
 	//.nav rules 
 	$rules .= ".nav, .nav .menu>li, .nav .menu>li>a {";
 	    if (is_array($options['nav']) && !empty($options['nav'])) {
-			$rules .= create_font_rule($options['nav']);
+			$rules .= create_font_rule($options['nav'], $c);
 		}
 	$rules .= "}";
 	
@@ -177,14 +239,14 @@ function create_rules() {
 	$rules .= ".nav:hover, .nav:focus, .nav .menu>li:hover, .nav .menu>li:hover>a, ";
 	$rules .= ".nav .menu>li:focus, .nav .menu>li:focus>a {";
 		if (is_array($options['nav_hover']) && !empty($options['nav_hover'])) {
-			$rules .= create_font_rule($options['nav_hover']);
+			$rules .= create_font_rule($options['nav_hover'], $c);
 		}
 	$rules .= "}";
 	
-	//.nav_focus rules 
+	//.nav_current rules 
 	$rules .= ".current-menu, .menu li.current-menu-item a, .current_page_item a, .current_page_ancestor {";
 	    if (is_array($options['nav_current']) && !empty($options['nav_current'])) {
-			$rules .= create_font_rule($options['nav_current']);
+			$rules .= create_font_rule($options['nav_current'], $c);
 		}
 	$rules .= "}";
 	
@@ -192,22 +254,22 @@ function create_rules() {
 	//.subnav rules 
 	$rules .= ".subnav, .subnav .menu>li, .subnav .menu>li>a, .nav .sub-menu>li, .nav .sub-menu>li>a {";
 	    if (is_array($options['subnav']) && !empty($options['subnav'])) {
-			$rules .= create_font_rule($options['subnav']);
+			$rules .= create_font_rule($options['subnav'], $c);
 		}
 	$rules .= "}";
 
 	//.subnav_hover rules 
-	$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li>a:hover, .subnav .menu>li>a:focus, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
+	$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li:hover>a, .subnav .menu>li:focus>a, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
 	$rules .= " .nav .sub-menu>li:focus, .nav .sub-menu>li:focus>a {";
 	    if (is_array($options['subnav_hover']) && !empty($options['subnav_hover'])) {
-			$rules .= create_font_rule($options['subnav_hover']);
+			$rules .= create_font_rule($options['subnav_hover'], $c);
 		}
 	$rules .= "}";
 
-	//.subnav_focus rules 
+	//.subnav_current rules 
 	$rules .= ".current-submenu, .current_page_ancestor .current_page_item, .subnav .current-menu{";
-		if (is_array($options['subnav_focus']) && !empty($options['subnav_focus'])) {
-			$rules .= create_font_rule($options['subnav_focus']);
+		if (is_array($options['subnav_current']) && !empty($options['subnav_current'])) {
+			$rules .= create_font_rule($options['subnav_current'], $c);
 		}
 	$rules .= "}";
 
@@ -254,6 +316,29 @@ function create_rules() {
 			$rules .= "padding-right: ". $num / 2 ."vw;";
 			$rules .= "padding-left: ". $num / 2 ."vw;";
 		$rules .= "}";
+	}
+	if (!empty($options['extra-small-margin']['pixel-amount'])) {
+		if (strpos($options['extra-small-margin']['pixel-amount'], 'px') > 0){
+    		$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+    		$num = (int)$num / 12;
+    		$value2 = $num . 'vw';
+			$rules .= ".extra-small-margin-bottom{";
+				$rules .= "margin-bottom: ". $options['extra-small-margin']['pixel-amount'] .";";
+				$rules .= "margin-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-margin-top{";
+				$rules .= "margin-top: ". $options['extra-small-margin']['pixel-amount'] .";";
+				$rules .= "margin-top: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-bottom{";
+				$rules .= "padding-bottom: ". $options['extra-small-margin']['pixel-amount'] .";";
+				$rules .= "padding-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-top{";
+				$rules .= "padding-top: ". $options['extra-small-margin']['pixel-amount'] .";";
+				$rules .= "padding-top: ". $value2 .";";
+			$rules .= "}";
+    	}
 	}
 	if (!empty($options['small-margin']['pixel-amount'])) {
 		if (strpos($options['small-margin']['pixel-amount'], 'px') > 0){
@@ -324,6 +409,29 @@ function create_rules() {
 			$rules .= "}";
     	}
 	}
+	if (!empty($options['extra-large-margin']['pixel-amount'])) {
+		if (strpos($options['extra-large-margin']['pixel-amount'], 'px') > 0){
+    		$num = substr($options['extra-large-margin']['pixel-amount'], 0, strpos($options['extra-large-margin']['pixel-amount'], 'px'));
+    		$num = (int)$num / 12;
+    		$value2 = $num . 'vw';
+			$rules .= ".extra-large-margin-bottom{";
+				$rules .= "margin-bottom: ". $options['extra-large-margin']['pixel-amount'] .";";
+				$rules .= "margin-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-margin-top{";
+				$rules .= "margin-top: ". $options['extra-large-margin']['pixel-amount'] .";";
+				$rules .= "margin-top: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-bottom{";
+				$rules .= "padding-bottom: ". $options['extra-large-margin']['pixel-amount'] .";";
+				$rules .= "padding-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-top{";
+				$rules .= "padding-top: ". $options['extra-large-margin']['pixel-amount'] .";";
+				$rules .= "padding-top: ". $value2 .";";
+			$rules .= "}";
+    	}
+	}
 	if (!empty($options['button-padding']) && is_array($options['button-padding'])) {
 		$rules .= ".a3, p.a3, .button, button{";
 	    	$px = '';
@@ -364,11 +472,27 @@ function create_rules() {
 				$rules .= "font-size: ". $options['h1']['font-size'] .";";
 			}
 		$rules .= "}";
+		$rules .= "h1.h-spacing, .h1.h-spacing { ";
+			if ( is_array($options['h1']) && !empty($options['h1']['bottom_spacing']) ) {
+				$bott = $options['h1']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
+			}
+		$rules .= "}";
 
 		//H2 rules
 		$rules .= "h2, .h2 {";
 			if ($options['h2']['font-size']) {
 				$rules .= "font-size: ". $options['h2']['font-size'] .";";
+			}
+		$rules .= "}";
+		$rules .= "h2.h-spacing, .h2.h-spacing { ";
+			if ( is_array($options['h2']) && !empty($options['h2']['bottom_spacing']) ) {
+				$bott = $options['h2']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
 			}
 		$rules .= "}";
 
@@ -378,11 +502,27 @@ function create_rules() {
 				$rules .= "font-size: ". $options['h3']['font-size'] .";";
 			}
 		$rules .= "}";
+		$rules .= "h3.h-spacing, .h3.h-spacing { ";
+			if ( is_array($options['h3']) && !empty($options['h3']['bottom_spacing']) ) {
+				$bott = $options['h3']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
+			}
+		$rules .= "}";
 
 		//H4 rules 
 		$rules .= "h4, .h4 {";
 			if ($options['h4']['font-size']) {
 				$rules .= "font-size: ". $options['h4']['font-size'] .";";
+			}
+		$rules .= "}";
+		$rules .= "h4.h-spacing, .h4.h-spacing { ";
+			if ( is_array($options['h4']) && !empty($options['h4']['bottom_spacing']) ) {
+				$bott = $options['h4']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
 			}
 		$rules .= "}";
 
@@ -392,11 +532,27 @@ function create_rules() {
 				$rules .= "font-size: ". $options['h5']['font-size'] .";";
 			}
 		$rules .= "}";
+		$rules .= "h5.h-spacing, .h5.h-spacing { ";
+			if ( is_array($options['h5']) && !empty($options['h5']['bottom_spacing']) ) {
+				$bott = $options['h5']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
+			}
+		$rules .= "}";
 		
 		//h6 rules 
 		$rules .= "h6, .h6 {";
 			if ($options['h6']['font-size']) {
 				$rules .= "font-size: ". $options['h6']['font-size'] .";";
+			}
+		$rules .= "}";
+		$rules .= "h6.h-spacing, .h6.h-spacing { ";
+			if ( is_array($options['h6']) && !empty($options['h6']['bottom_spacing']) ) {
+				$bott = $options['h6']['bottom_spacing'].'-margin';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $options[$bott]['pixel-amount'] .";";
+				}
 			}
 		$rules .= "}";
 
@@ -457,10 +613,10 @@ function create_rules() {
 			}
 		$rules .= "}";
 		
-		//.nav_focus rules 
+		//.nav_current rules 
 		$rules .= ".current-menu, .menu li.current-menu-item a, .current_page_item a, .current_page_ancestor {";
-		    if ($options['nav_focus']['font-size']) {
-				$rules .= "font-size: ". $options['nav_focus']['font-size'] .";";
+		    if ($options['nav_current']['font-size']) {
+				$rules .= "font-size: ". $options['nav_current']['font-size'] .";";
 			}
 		$rules .= "}";
 		
@@ -473,17 +629,17 @@ function create_rules() {
 		$rules .= "}";
 
 		//.subnav_hover rules 
-		$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li>a:hover, .subnav .menu>li>a:focus, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
+		$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li:hover>a, .subnav .menu>li:focus>a, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
 		$rules .= " .nav .sub-menu>li:focus, .nav .sub-menu>li:focus>a {";
 		    if ($options['subnav_hover']['font-size']) {
 				$rules .= "font-size: ". $options['subnav_hover']['font-size'] .";";
 			}
 		$rules .= "}";
 
-		//.subnav_focus rules
+		//.subnav_current rules
 		$rules .= ".current-submenu, .current_page_ancestor .current_page_item, .subnav .current-menu{";
-			if ($options['subnav_focus']['font-size']) {
-				$rules .= "font-size: ". $options['subnav_focus']['font-size'] .";";
+			if ($options['subnav_current']['font-size']) {
+				$rules .= "font-size: ". $options['subnav_current']['font-size'] .";";
 			}
 		$rules .= "}";
 		//global style rules
@@ -498,8 +654,8 @@ function create_rules() {
 			$rules .= "}";
 		}
 		if (!empty($options['column-gutter']['pixel-amount'])) {
-			if (strpos($options['medium-margin']['pixel-amount'], 'px')){
-	    		$num = substr($options['medium-margin']['pixel-amount'], 0, strpos($options['medium-margin']['pixel-amount'], 'px'));
+			if (strpos($options['column-gutter']['pixel-amount'], 'px')){
+	    		$num = substr($options['column-gutter']['pixel-amount'], 0, strpos($options['column-gutter']['pixel-amount'], 'px'));
 	    		$num = (int)$num / 12;
 	    	}
 			$rules .= ".row, .gutter-row{";
@@ -510,6 +666,20 @@ function create_rules() {
 				$rules .= "margin-bottom: ". $options['column-gutter']['pixel-amount'] .";";
 				$rules .= "padding-right: ". $num * 6 ."px;";
 				$rules .= "padding-left: ". $num * 6 ."px;";
+			$rules .= "}";
+		}
+		if (!empty($options['extra-small-margin']['pixel-amount'])) {
+			$rules .= ".extra-small-margin-bottom{";
+				$rules .= "margin-bottom: ". $options['extra-small-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-small-margin-top{";
+				$rules .= "margin-top: ". $options['extra-small-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-bottom{";
+				$rules .= "padding-bottom: ". $options['extra-small-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-top{";
+				$rules .= "padding-top: ". $options['extra-small-margin']['pixel-amount'] .";";
 			$rules .= "}";
 		}
 		if (!empty($options['small-margin']['pixel-amount'])) {
@@ -554,6 +724,20 @@ function create_rules() {
 				$rules .= "padding-top: ". $options['large-margin']['pixel-amount'] .";";
 			$rules .= "}";
 		}
+		if (!empty($options['extra-large-margin']['pixel-amount'])) {
+			$rules .= ".extra-large-margin-bottom{";
+				$rules .= "margin-bottom: ". $options['extra-large-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-large-margin-top{";
+				$rules .= "margin-top: ". $options['extra-large-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-bottom{";
+				$rules .= "padding-bottom: ". $options['extra-large-margin']['pixel-amount'] .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-top{";
+				$rules .= "padding-top: ". $options['extra-large-margin']['pixel-amount'] .";";
+			$rules .= "}";
+		}
 		if (!empty($options['button-padding']) && is_array($options['button-padding'])) {
 			$rules .= ".a3, p.a3, .button, button{";
 		    	$px = '';
@@ -586,30 +770,96 @@ function create_rules() {
 		$rules .= "h1, .h1 { ";
 			$rules .= create_font_responsive($options['h1']['font-size'], 'font-size');
 		$rules .= "}";
+		$rules .= "h1.h-spacing, .h1.h-spacing { ";
+			if ( is_array($options['h1']) && !empty($options['h1']['bottom_spacing']) ) {
+				$bott = $options['h1']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
+		$rules .= "}";
 
 		//H2 rules
 		$rules .= "h2, .h2 {";
 			$rules .= create_font_responsive($options['h2']['font-size'], 'font-size');
+		$rules .= "}";
+		$rules .= "h2.h-spacing, .h2.h-spacing { ";
+			if ( is_array($options['h2']) && !empty($options['h2']['bottom_spacing']) ) {
+				$bott = $options['h2']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
 		$rules .= "}";
 
 		//H3 rules 
 		$rules .= "h3, .h3 {";
 			$rules .= create_font_responsive($options['h3']['font-size'], 'font-size');
 		$rules .= "}";
+		$rules .= "h3.h-spacing, .h3.h-spacing { ";
+			if ( is_array($options['h3']) && !empty($options['h3']['bottom_spacing']) ) {
+				$bott = $options['h3']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
+		$rules .= "}";
 
 		//H4 rules 
 		$rules .= "h4, .h4 {";
 			$rules .= create_font_responsive($options['h4']['font-size'], 'font-size');
+		$rules .= "}";
+		$rules .= "h4.h-spacing, .h4.h-spacing { ";
+			if ( is_array($options['h4']) && !empty($options['h4']['bottom_spacing']) ) {
+				$bott = $options['h4']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
 		$rules .= "}";
 
 		//h5 rules 
 		$rules .= "h5, .h5 {";
 			$rules .= create_font_responsive($options['h5']['font-size'], 'font-size');
 		$rules .= "}";
+		$rules .= "h5.h-spacing, .h5.h-spacing { ";
+			if ( is_array($options['h5']) && !empty($options['h5']['bottom_spacing']) ) {
+				$bott = $options['h5']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
+		$rules .= "}";
 		
 		//h6 rules 
 		$rules .= "h6, .h6 {";
 			$rules .= create_font_responsive($options['h6']['font-size'], 'font-size');
+		$rules .= "}";
+		$rules .= "h6.h-spacing, .h6.h-spacing { ";
+			if ( is_array($options['h6']) && !empty($options['h6']['bottom_spacing']) ) {
+				$bott = $options['h6']['bottom_spacing'].'-margin';
+				$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+				if (isset($options[$bott]['pixel-amount']) && !empty($options[$bott]['pixel-amount'])) {
+					$rules .= "margin-bottom: ". $value2 .";";
+				}
+			}
 		$rules .= "}";
 
 		//a rules 
@@ -653,9 +903,9 @@ function create_rules() {
 			$rules .= create_font_responsive($options['nav_hover']['font-size'], 'font-size');
 		$rules .= "}";
 		
-		//.nav_focus rules 
+		//.nav_current rules 
 		$rules .= ".current-menu, .menu li.current-menu-item a, .current_page_item a, .current_page_ancestor {";
-		    $rules .= create_font_responsive($options['nav_focus']['font-size'], 'font-size');
+		    $rules .= create_font_responsive($options['nav_current']['font-size'], 'font-size');
 		$rules .= "}";
 		
 
@@ -665,14 +915,14 @@ function create_rules() {
 		$rules .= "}";
 
 		//.subnav_hover rules 
-		$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li>a:hover, .subnav .menu>li>a:focus, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
+		$rules .= ".subnav:hover, .subnav:focus, .subnav .menu>li:hover, .subnav .menu>li:focus, .subnav .menu>li:hover>a, .subnav .menu>li:focus>a, .nav .sub-menu>li:hover, .nav .sub-menu>li:hover>a,";
 		$rules .= " .nav .sub-menu>li:focus, .nav .sub-menu>li:focus>a {";
 		    $rules .= create_font_responsive($options['subnav_hover']['font-size'], 'font-size');
 		$rules .= "}";
 
-		//.subnav_focus rules
+		//.subnav_current rules
 		$rules .= ".current-submenu, .current_page_ancestor .current_page_item, .subnav .current-menu{";
-			$rules .= create_font_responsive($options['subnav_focus']['font-size'], 'font-size');
+			$rules .= create_font_responsive($options['subnav_current']['font-size'], 'font-size');
 		$rules .= "}";
 		//global style rules
 		if (!empty($options['article-padding']['pixel-amount'])) {
@@ -699,6 +949,25 @@ function create_rules() {
 				$rules .= "margin-bottom: ". $value2 .";";
 				$rules .= "padding-right: ". $num / 2 ."px;";
 				$rules .= "padding-left: ". $num / 2 ."px;";
+			$rules .= "}";
+		}
+		if (!empty($options['extra-small-margin']['pixel-amount'])) {
+			if (strpos($options['extra-small-margin']['pixel-amount'], 'px')){
+	    		$num = substr($options['extra-small-margin']['pixel-amount'], 0, strpos($options['extra-small-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+	    	}
+			$rules .= ".extra-small-margin-bottom{";
+				$rules .= "margin-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-margin-top{";
+				$rules .= "margin-top: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-bottom{";
+				$rules .= "padding-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-small-padding-top{";
+				$rules .= "padding-top: ". $value2 .";";
 			$rules .= "}";
 		}
 		if (!empty($options['small-margin']['pixel-amount'])) {
@@ -755,6 +1024,25 @@ function create_rules() {
 				$rules .= "padding-bottom: ". $value2 .";";
 			$rules .= "}";
 			$rules .= ".large-padding-top{";
+				$rules .= "padding-top: ". $value2 .";";
+			$rules .= "}";
+		}
+		if (!empty($options['extra-large-margin']['pixel-amount'])) {
+			if (strpos($options['extra-large-margin']['pixel-amount'], 'px')){
+	    		$num = substr($options['extra-large-margin']['pixel-amount'], 0, strpos($options['extra-large-margin']['pixel-amount'], 'px'));
+	    		$num = round((int)$num * 1.54167);
+			    $value2 = $num . 'px';
+	    	}
+			$rules .= ".extra-large-margin-bottom{";
+				$rules .= "margin-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-margin-top{";
+				$rules .= "margin-top: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-bottom{";
+				$rules .= "padding-bottom: ". $value2 .";";
+			$rules .= "}";
+			$rules .= ".extra-large-padding-top{";
 				$rules .= "padding-top: ". $value2 .";";
 			$rules .= "}";
 		}
